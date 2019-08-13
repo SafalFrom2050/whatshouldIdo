@@ -17,7 +17,7 @@
     <body>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="#">What Should I Do?</a>
-                    <a class="nav-link navLinks" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link navLinks" href="/home">Home <span class="sr-only">(current)</span></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
@@ -28,9 +28,9 @@
                         </li>
                       </ul>
                       <span class="form-inline">
-                          <a class="nav-link navLinks" href="#">Privacy Policy</a>
-                          <a class="nav-link navLinks" href="#">Contact Us</a>
-                          <a class="nav-link navLinks" href="#">Terms Of Service</a>
+                          <a class="nav-link navLinks" href="/Privacy">Privacy Policy</a>
+                          <a class="nav-link navLinks" href="/Contact Us">Contact Us</a>
+                          <a class="nav-link navLinks" href="/Terms">Terms Of Service</a>
                       </span>
                     </div>
                   </nav>
@@ -45,9 +45,11 @@
 
         <div class="container-fluid bg2">
                 <div class="row">
+                        
                         <div class="col-md-12 col-xs-12 col1 center-block mainButton"> 
-                                <button type="button" class="btn btn-light mainButton" data-toggle="modal" data-target="#inputModal"><h4 class="buttonFont">Tell Me About Your Day</h4></button>   
+                                <button type="button" class="btn btn-light mainButton circle" data-toggle="modal" data-target="#inputModal"><h4 class="buttonFont">Tell Me About Your Day</h4></button>   
                             </div>
+                        </div>
                 </div>
         </div>   
         
@@ -59,9 +61,9 @@
                                     <div class="card-body">
                                       <h4 class="card-title">Pooja Karki</h4>
                                       <p class="card-text">Is a hobbyist programmer who writes code for 8 hours a day just for fun...</p>
-                                      <a href="#" class="btn btn-primary">Copy Her Day</a>
+                                      <a href="#" onclick="copyActivity(1)" class="btn btn-outline-dark" id="btn1">Copy Her Day</a>
                                     </div>
-                                    <img class="card-img-bottom" src="blank sign.jpg" alt="Card image" style="width:100%">
+                                    <img class="card-img-bottom" src="girl.jpg" alt="Card image" style="width:100%">
                             </div>
                     </div>
 
@@ -69,20 +71,20 @@
                             <div class="card" style="width:80%;">
                                     <div class="card-body">
                                       <h4 class="card-title">John Constantine</h4>
-                                      <p class="card-text">....</p>
-                                      <a href="#" class="btn btn-primary">Copy His Day</a>
+                                      <p class="card-text">Searches For Demons On Internet And Sends Them To Hell.</p>
+                                      <a href="#" onclick="copyActivity(2)" class="btn btn-outline-dark" id="btn2">Copy His Day</a>
                                     </div>
-                                    <img class="card-img-bottom" src="blank sign.jpg" alt="Card image" style="width:100%">
+                                    <img class="card-img-bottom" src="hacker.jpg" alt="Card image" style="width:100%">
                             </div>
                     </div>
                     <div class="col-md-4 col-xs-12 center-block"> 
                             <div class="card" style="width:80%;">
                                     <div class="card-body">
                                       <h4 class="card-title">Harry Potter</h4>
-                                      <p class="card-text">...</p>
-                                      <a href="#" class="btn btn-primary">Copy His Day</a>
+                                      <p class="card-text">Spends His Most Time Teaching 'Defence In Dark Arts' In Hogwards: School Of Magic And Witchcraft</p>
+                                      <a href="#" onclick="copyActivity(3)" class="btn btn-outline-dark" id="btn3">Copy His Day</a>
                                     </div>
-                                    <img class="card-img-bottom" src="blank sign.jpg" alt="Card image" style="width:100%">
+                                    <img class="card-img-bottom" src="harry.jpg" alt="Card image" style="width:100%">
                             </div>
                     </div>
             </div>
@@ -108,17 +110,16 @@
                                      to
                                      <input type="time" id="end_time">
                                      <br><br> 
-                                     I'm busy <input type="text" id="task">
+                                     I'm Spend My Time <input placeholder="eg. Doing My Laundry" type="text" id="task">
                             </div>
                         
                           
                           <div id="time"></div>
                           <br>
-                          <!--Choices-->
                                 How would you define this task as? <br>
-                                <input id="r1" type="radio" checked> Work<br>
-                                <input id="r2" type="radio"  > Entertainment<br>
-                                <input id="r3" type="radio"  > Hobby
+                                <input id="r1" type="radio" name="type" checked> Work<br>
+                                <input id="r2" type="radio" name="type" > Entertainment<br>
+                                <input id="r3" type="radio" name="type" > Hobby
                                 <br>
                         </form>
                         <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="return getTime();">Submit</button>

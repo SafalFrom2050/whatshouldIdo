@@ -3,8 +3,13 @@
 function load(){
     var welcomeText="Hello " + getCookie("username")+",";
     var activeTask=loadTasks();
-    if(activeTask!=""){
+    if(activeTask!="" && !(activeTask===undefined)){
         welcomeText=welcomeText+"<br><br> You Said You Should Be "+activeTask +" Right Now.";
+    }else if(activeTask=="0"){
+        welcomeText=welcomeText+"<br><br> Your List Is Empty. Try Adding A Few Tasks To Your List... :)";
+        insertAddMoreCard();
+    }else{
+        welcomeText=welcomeText+"<br><br> It Looks Like You Are Free. Enjoy Life...";
     }
     document.getElementById("welcomeText").innerHTML=welcomeText;
 }
@@ -19,57 +24,52 @@ function loadTasks(){
         var startTime=getCookie(i+".startTime");
         var endTime=getCookie(i+".endTime");
 
-        if(startTime==""){return;}
+        if(startTime!=""){
+            var timeRange=startTime+" - " + endTime;
+            var taskName=getCookie(i+".taskName");
 
-        var timeRange=startTime+" - " + endTime;
-        var taskName=getCookie(i+".taskName");
+            var cardTheme="";
+            if(checkIsTaskTime(startTime,endTime)){
+                rtn = taskName;
+                cardTheme="activeCard"
+            }
 
-        var cardTheme="";
-        if(checkIsTaskTime){
-            rtn = taskName;
-            cardTheme="activeCard"
+            var type=getCookie(i+".type");
+            if(type=="work"){
+                img="work.jpg"
+            }else if(type=="fun"){
+                img="fun.jpg"
+            }else if(type=="hobby"){
+                img="hobby.jpg"
+            }
+
+            var content="<div class='col-md-4 col-xs-4 '>"+ 
+            "<div class='card "+ cardTheme + "'>"+
+                    "<img class='card-img-top' src='" + img + "' alt='Card image' style='width:100%'>"+
+                    "<div class='card-body'>"+
+                    "<h4 class='card-title pointerGrab'>" + timeRange + "</h4>"+
+                    "<p class='card-text pointerGrab'>" + taskName + "</p>"+
+                    "<a href=''><img src='delete.png' onclick='deleteCookie(" + i + ")' align='right'></a>"+
+                    "</div>"+
+            "</div>"+
+            "</div>"
+            document.getElementById("taskList").innerHTML+=content;
+            cardTheme="";
         }
-
-        var type=getCookie(i+".type");
-        if(type=="work"){
-            img="work.jpg"
-        }else if(type=="fun"){
-            img="fun.jpg"
-        }else if(type=="hobby"){
-            img="hobby.jpg"
-        }
-
-        var content="<div class='col-md-4 col-xs-4 '>"+ 
-        "<div class='card "+ cardTheme + "'>"+
-                "<img class='card-img-top' src='" + img + "' alt='Card image' style='width:100%'>"+
-                "<div class='card-body'>"+
-                "<h4 class='card-title'>" + timeRange + "</h4>"+
-                "<p class='card-text'>" + taskName + "</p>"+
-                "<a href=''><img src='delete.png' onclick='deleteCookie(" + i + ")' align='right'></a>"+
-                "</div>"+
-        "</div>"+
-        "</div>"
-        document.getElementById("taskList").innerHTML+=content;
-        cardTheme="";
     }
-    var end="<div class='col-md-4 col-xs-4 '>"+ 
-        "<div class='card' data-toggle='modal' data-target='#inputModal'>"+
-                "<img class='card-img-top' src='addMore.jpg' alt='Card image' style='width:100%'>"+
-                "<div class='card-body'>"+
-                "<h2 class='card-title'>Add New Tasks</h2>"+
-                "</div>"+
-        "</div>"+
-        "</div>"
-        document.getElementById("taskList").innerHTML+=end;
+   insertAddMoreCard();
 
+   if(count=="" || count==0){
+       return "0";
+   }
     return rtn;
 }
 
 function checkIsTaskTime( startTime,  endTime){
     var rightNow=new Date();
 
-    if(startTime.split(":")[0]<rightNow.getHours() && endTime.split(":"[0]>rightNow.getHours())){
-        if(startTime.split(":")[1]<rightNow.getMinutes() && endTime.split(":"[1]>rightNow.getMinutes())){
+    if(startTime.split(":")[0]<=rightNow.getHours() && rightNow.getHours() < endTime.split(":")[0]){
+        if(startTime.split(":")[1]<rightNow.getMinutes() && rightNow.getMinutes() < endTime.split(":")[1]){
             return true;
         }    
     }
@@ -101,11 +101,11 @@ function getCookie(n) {
     var type;
 
     if(document.getElementById("r1").checked){
-        type="Work";
+        type="work";
     } else if(document.getElementById("r2").checked){
-        type="Entertainment";
+        type="fun";
     } else if(document.getElementById("r3").checked){
-        type="Hobby";
+        type="hobby";
     }
     
     var count=parseInt(getCookie("count"));
@@ -125,6 +125,18 @@ function saveData(name, value, exdays) {
     document.cookie = name + "=" + value + ";" + expires + "; path=/";
   }
 
+function insertAddMoreCard(){
+    var end="<div class='col-md-4 col-xs-4 '>"+ 
+        "<div class='card' data-toggle='modal' data-target='#inputModal'>"+
+                "<img class='card-img-top' src='addMore.jpg' alt='Card image' style='width:100%'>"+
+                "<div class='card-body'>"+
+                "<h2 class='card-title'>Add New Tasks</h2>"+
+                "</div>"+
+        "</div>"+
+        "</div>"
+        document.getElementById("taskList").innerHTML+=end;
+}
+
   function removeData(name){
     if(getCookie(name)!=""){
         saveData(name,"",0);
@@ -132,8 +144,8 @@ function saveData(name, value, exdays) {
   }
 
   function deleteCookie(count){
-    saveData(count+".startTime",startTime,365*10);
-    saveData(count+".endTime",endTime,365*10);
-    saveData(count+".taskName",taskName,365*10);
-    saveData(count+".type",type,365*10);
+    saveData(count+".startTime","",0);
+    saveData(count+".endTime","",0);
+    saveData(count+".taskName","",0);
+    saveData(count+".type","",0);
   }

@@ -59,3 +59,31 @@ function saveData(name, value, exdays) {
         window.location.replace("/home");
     }
   }
+
+  function copyActivity(id){
+    var startTime, endTime, type, taskName;
+    if(id==1){
+      startTime="05:00";
+      endTime="13:00";
+      type="hobby";
+      taskName="Developing Android App (Coding + Designing + Production)"
+    }else if(id==2){
+      startTime="17:00";
+      endTime="23:00";
+      type="fun";
+      taskName="Searching For Demons On Internet"
+    }else if (id==3){
+      startTime="10:00";
+      endTime="17:00";
+      type="work";
+      taskName="Teaching Defence In Dark Arts In Hogwards: School Of Magic And Witchcraft"
+    }
+
+    var count=parseInt(getCookie("count"));
+    if(getCookie("count")=="") count=0;
+    saveData("count", count + 1)
+    saveData(count+".startTime",startTime,365*10);
+    saveData(count+".endTime",endTime,365*10);
+    saveData(count+".taskName",taskName,365*10);
+    saveData(count+".type",type,365*10);
+  }

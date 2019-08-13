@@ -39,7 +39,7 @@
       height: 50%;
   }
   .heading{
-    margin-top: 15%;
+    margin-top: 10%;
     padding-right:15%;
     padding-left:15%;
     
@@ -50,6 +50,15 @@
   }
   .card{
       margin-top:4%;
+      cursor: grab;
+  }
+
+  .card:hover{
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+    transform: translate3d(0px, -5px, 0px);
+  }
+  .pointerGrab{
+    cursor: grab;
   }
   .activeCard{
       background-color: greenyellow;
