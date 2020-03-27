@@ -45,7 +45,7 @@ function loadTasks(){
 
             var content="<div class='col-md-4 col-xs-4 '>"+ 
             "<div class='card "+ cardTheme + "'>"+
-                    "<img class='card-img-top' src='" + img + "' alt='Card image' style='width:100%'>"+
+                    "<img class='card-img-top' src='"+"home/" + img + "' alt='Card image' style='width:100%'>"+
                     "<div class='card-body'>"+
                     "<h4 class='card-title pointerGrab'>" + timeRange + "</h4>"+
                     "<p class='card-text pointerGrab'>" + taskName + "</p>"+
