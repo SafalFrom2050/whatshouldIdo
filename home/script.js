@@ -49,7 +49,7 @@ function loadTasks(){
                     "<div class='card-body'>"+
                     "<h4 class='card-title pointerGrab'>" + timeRange + "</h4>"+
                     "<p class='card-text pointerGrab'>" + taskName + "</p>"+
-                    "<a href=''><img src='delete.png' onclick='deleteCookie(" + i + ")' align='right'></a>"+
+                    "<a href=''><img src='home/delete.png' onclick='deleteCookie(" + i + ")' align='right'></a>"+
                     "</div>"+
             "</div>"+
             "</div>"
