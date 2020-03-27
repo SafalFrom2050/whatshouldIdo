@@ -128,7 +128,7 @@ function saveData(name, value, exdays) {
 function insertAddMoreCard(){
     var end="<div class='col-md-4 col-xs-4 '>"+ 
         "<div class='card' data-toggle='modal' data-target='#inputModal'>"+
-                "<img class='card-img-top' src='addMore.jpg' alt='Card image' style='width:100%'>"+
+                "<img class='card-img-top' src='home/addMore.jpg' alt='Card image' style='width:100%'>"+
                 "<div class='card-body'>"+
                 "<h2 class='card-title'>Add New Tasks</h2>"+
                 "</div>"+
